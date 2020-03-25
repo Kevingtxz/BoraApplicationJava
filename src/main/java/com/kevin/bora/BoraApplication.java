@@ -44,21 +44,6 @@ public class BoraApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Category cat1 = new Category(null, "Sport");
-		Category cat2 = new Category(null, "Party");
-
-		Event e1 = new Event(null, "Futebol", "24/03/2020", "22:53", cat1);
-		Event e2 = new Event(null, "Vôlei", "21/10/2020", "22:53", cat1);
-		Event e3 = new Event(null, "Boate", "01/01/2020", "22:53", cat2);
-		Event e4 = new Event(null, "Axe", "20/01/2020", "22:53", cat2);
-		
-		cat1.getEvents().addAll(Arrays.asList(e1,e2));
-		cat2.getEvents().addAll(Arrays.asList(e3, e4));
-		
-		categoryRepository.saveAll(Arrays.asList(cat1, cat2));
-		eventRepository.saveAll(Arrays.asList(e1, e2, e3, e4));
-		
-		
 		State s1 = new State(null, "RJ");
 		State s2 = new State(null, "SP");
 		State s3 = new State(null, "RG");
@@ -67,25 +52,37 @@ public class BoraApplication implements CommandLineRunner{
 		City c2 = new City(null, "São Paulo", s2);
 		City c3 = new City(null, "Rio Grande", s3);
 		
-		s1.getCities().addAll(Arrays.asList(c1));
-		s2.getCities().addAll(Arrays.asList(c2));
-		s3.getCities().addAll(Arrays.asList(c3));
-		
-
-		stateRepository.saveAll(Arrays.asList(s1, s2, s3));
-		cityRepository.saveAll(Arrays.asList(c1, c2, c3));
-		
 		Address a1 = new Address(null, "1024", "White House", "Mirante Da Lagoa", c1);
 		Address a2 = new Address(null, "108", "Black", "Lagomar", c1);
 		Address a3 = new Address(null, "24", "Grey", "Rio Grande", c3);
+		
 		
 		User u1 = new User(null, "Kevin", "Gonçalves", "21/10", "kevingtxz@gmail.com", "ratao", "macaco", true, Permission.OWNER, a1);
 		User u2 = new User(null, "Bug", "Mello", "10/2", "melo@hotmail.com", "vaca", "sapo", false, Permission.BLOQUEAD, a3);
 		User u3 = new User(null, "Walter", "Vargas", "25/03", "waltinho@wal.com", "soco", "vrawl", true, Permission.MANAGER, a2);
 
+		Category cat1 = new Category(null, "Sport");
+		Category cat2 = new Category(null, "Party");
 
+		Event e1 = new Event(null, "Futebol", "24/03/2020", "22:53", cat1, a1);
+		Event e2 = new Event(null, "Vôlei", "21/10/2020", "22:53", cat1, a2);
+		Event e3 = new Event(null, "Boate", "01/01/2020", "22:53", cat2, a2);
+		Event e4 = new Event(null, "Axe", "20/01/2020", "22:53", cat2, a1);
+		
+		cat1.getEvents().addAll(Arrays.asList(e1,e2));
+		cat2.getEvents().addAll(Arrays.asList(e3, e4));
+		
+		s1.getCities().addAll(Arrays.asList(c1));
+		s2.getCities().addAll(Arrays.asList(c2));
+		s3.getCities().addAll(Arrays.asList(c3));
+		
+
+		
+		stateRepository.saveAll(Arrays.asList(s1, s2, s3));
+		cityRepository.saveAll(Arrays.asList(c1, c2, c3));
 		addressRepository.saveAll(Arrays.asList(a1, a2, a3));
 		userRepository.saveAll(Arrays.asList(u1, u2, u3));
-		
+		categoryRepository.saveAll(Arrays.asList(cat1, cat2));
+		eventRepository.saveAll(Arrays.asList(e1, e2, e3, e4));
 	}
 }

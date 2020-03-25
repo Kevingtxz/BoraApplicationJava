@@ -11,10 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kevin.bora.domain.enums.Permission;
 
 @Entity
@@ -41,15 +39,19 @@ public class User implements Serializable{
 	@OneToOne	
 	@JoinColumn(name="address_id")
 	private Address address;
+/*
+	@ManyToMany
+	private List<Event> myEvents = new ArrayList<>();
 
-// private Integer permission;
-// private Integer status;
+	@OneToMany
+ 	private List<Status> myEvents = new ArrayList<>();
 
-// 	private List<EventUsers> myEvents = new ArrayList<>();
-// 	private List<Status> myEvents = new ArrayList<>();
-// 	private List<PostBora> myPosts = new ArrayList<>();
-// 	private List<Location> location = new ArrayList<>();
-	
+ 	@OneToMany
+ 	private List<PostBora> myPosts = new ArrayList<>();
+ 	
+ 	@OneToMany
+ 	private List<Location> location = new ArrayList<>();
+*/		
 	public User() {
 	}
 	

@@ -10,8 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 public class Address implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -31,10 +29,10 @@ public class Address implements Serializable{
 	@OneToOne(mappedBy="address")
 	private User user;
 	
-/*
-	@OneToOne(mappedBy="address_id")
+
+	@OneToOne(mappedBy="address")
 	private Event event;
-*/
+
 	public Address() {
 	}
 	

@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -27,25 +28,32 @@ public class Event  implements Serializable{
 	@JoinColumn(name="category_id")
 	private Category category;
 	
-	
-//@OneToOne(mappedBy="event_id")
-//private Address adress_id;
-	
-	
-// private Integer fk_SmallPage
-// private Integer fk_EventUsers;
-// private Integer fk_Category;
+	@OneToOne
+	@JoinColumn(name="address_id")
+	private Address address;
 
+/*
+	@OneToMany
+	private List<Status> status = new ArrayList<>();
+	
+	@OneToMany
+	private List<Category> = new ArrayList<>();
+	
+	
+	@ManyToMany
+	private List<Users> users = new ArrayList<>();
+*/
 	public Event() {
 	}
 
-	public Event(Integer id, String name, String date, String time, Category category) {
+	public Event(Integer id, String name, String date, String time, Category category, Address address) {
 	super();
 	this.id = id;
 	this.name = name;
 	this.date = date;
 	this.time = time;
 	this.category = category;
+	this.address = address;
 }
 
 	
@@ -88,15 +96,15 @@ public class Event  implements Serializable{
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-/*
+	
 	public Address getAddress() {
-		return adress_id;
+		return address;
 	}
 
-	public void setAddress(Address adress_id) {
-		this.adress_id = adress_id;
+	public void setAddress(Address address) {
+		this.address = address;
 	}
-*/
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
