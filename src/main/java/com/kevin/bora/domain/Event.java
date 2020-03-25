@@ -1,37 +1,47 @@
 package com.kevin.bora.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Category implements Serializable{
+public class Event  implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
+	private String date;
+	private String time;
 	
-	@OneToMany(mappedBy="category")
-	private List<Event> events = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name="category_id")
+	private Category category;
 	
-	public Category() {
+// private Integer fk_SmallPage
+// private Integer fk_Localization;
+// private Integer fk_EventUsers;
+// private Integer fk_Category;
+
+	public Event() {
 	}
 
-	public Category(Integer id, String name) {
-		super();
-		this.id = id;
-		this.name = name;
-	}
+	public Event(Integer id, String name, String date, String time, Category category) {
+	super();
+	this.id = id;
+	this.name = name;
+	this.date = date;
+	this.time = time;
+	this.category = category;
+}
 
+	
 	public Integer getId() {
 		return id;
 	}
@@ -48,14 +58,30 @@ public class Category implements Serializable{
 		this.name = name;
 	}
 
-	public List<Event> getEvents() {
-		return events;
+	public String getDate() {
+		return date;
 	}
 
-	public void setEvents(List<Event> events) {
-		this.events = events;
+	public void setDate(String date) {
+		this.date = date;
 	}
-	
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -72,7 +98,7 @@ public class Category implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Category other = (Category) obj;
+		Event other = (Event) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -80,4 +106,7 @@ public class Category implements Serializable{
 			return false;
 		return true;
 	}
+	
+	 
+	
 }
