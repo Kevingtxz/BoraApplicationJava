@@ -75,8 +75,10 @@ public class BoraApplication implements CommandLineRunner{
 		s1.getCities().addAll(Arrays.asList(c1));
 		s2.getCities().addAll(Arrays.asList(c2));
 		s3.getCities().addAll(Arrays.asList(c3));
-		
 
+		u1.getPhones().addAll(Arrays.asList("90909090"));
+		u2.getPhones().addAll(Arrays.asList("50909090"));
+		u3.getPhones().addAll(Arrays.asList("00909090"));
 		
 		stateRepository.saveAll(Arrays.asList(s1, s2, s3));
 		cityRepository.saveAll(Arrays.asList(c1, c2, c3));

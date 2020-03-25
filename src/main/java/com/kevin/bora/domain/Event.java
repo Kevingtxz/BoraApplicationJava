@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -28,7 +27,8 @@ public class Event  implements Serializable{
 	@JoinColumn(name="category_id")
 	private Category category;
 	
-	@OneToOne
+	@JsonBackReference
+	@ManyToOne
 	@JoinColumn(name="address_id")
 	private Address address;
 

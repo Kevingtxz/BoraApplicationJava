@@ -1,6 +1,8 @@
 package com.kevin.bora.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Address implements Serializable{
@@ -26,13 +30,14 @@ public class Address implements Serializable{
 	@JoinColumn(name="city_id")
 	private City city;
 	
-	@OneToOne(mappedBy="address")
-	private User user;
+	@JsonManagedReference
+	@OneToMany(mappedBy="address")
+	private List<User> users = new ArrayList<>();
 	
-
-	@OneToOne(mappedBy="address")
-	private Event event;
-
+	@JsonManagedReference
+	@OneToMany(mappedBy="address")
+	private List<Event> events= new ArrayList<>();
+		
 	public Address() {
 	}
 	
@@ -75,13 +80,6 @@ public class Address implements Serializable{
 
 	public void setNeighborhood(String neighborhood) {
 		this.neighborhood = neighborhood;
-	}
-	public User getuser() {
-		return user;
-	}
-
-	public void setuser(User user) {
-		this.user = user;
 	}
 	
 	public City getCity() {
