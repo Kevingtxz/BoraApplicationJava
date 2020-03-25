@@ -7,14 +7,19 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.kevin.bora.domain.Address;
 import com.kevin.bora.domain.Category;
 import com.kevin.bora.domain.City;
 import com.kevin.bora.domain.Event;
 import com.kevin.bora.domain.State;
+import com.kevin.bora.domain.User;
+import com.kevin.bora.domain.enums.Permission;
+import com.kevin.bora.repositories.AddressRepository;
 import com.kevin.bora.repositories.CategoryRepository;
 import com.kevin.bora.repositories.CityRepository;
 import com.kevin.bora.repositories.EventRepository;
 import com.kevin.bora.repositories.StateRepository;
+import com.kevin.bora.repositories.UserRepository;
 
 @SpringBootApplication
 public class BoraApplication implements CommandLineRunner{
@@ -27,6 +32,10 @@ public class BoraApplication implements CommandLineRunner{
 	private CityRepository cityRepository;
 	@Autowired
 	private StateRepository stateRepository;
+	@Autowired
+	private AddressRepository addressRepository;
+	@Autowired
+	private UserRepository userRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(BoraApplication.class, args);
@@ -65,6 +74,18 @@ public class BoraApplication implements CommandLineRunner{
 
 		stateRepository.saveAll(Arrays.asList(s1, s2, s3));
 		cityRepository.saveAll(Arrays.asList(c1, c2, c3));
+		
+		Address a1 = new Address(null, "1024", "White House", "Mirante Da Lagoa", c1);
+		Address a2 = new Address(null, "108", "Black", "Lagomar", c1);
+		Address a3 = new Address(null, "24", "Grey", "Rio Grande", c3);
+		
+		User u1 = new User(null, "Kevin", "Gonçalves", "21/10", "kevingtxz@gmail.com", "ratao", "macaco", true, Permission.OWNER, a1);
+		User u2 = new User(null, "Bug", "Mello", "10/2", "melo@hotmail.com", "vaca", "sapo", false, Permission.BLOQUEAD, a3);
+		User u3 = new User(null, "Walter", "Vargas", "25/03", "waltinho@wal.com", "soco", "vrawl", true, Permission.MANAGER, a2);
+
+
+		addressRepository.saveAll(Arrays.asList(a1, a2, a3));
+		userRepository.saveAll(Arrays.asList(u1, u2, u3));
 		
 	}
 }

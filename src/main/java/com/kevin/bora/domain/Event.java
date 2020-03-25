@@ -27,8 +27,12 @@ public class Event  implements Serializable{
 	@JoinColumn(name="category_id")
 	private Category category;
 	
+	
+//@OneToOne(mappedBy="event_id")
+//private Address adress_id;
+	
+	
 // private Integer fk_SmallPage
-// private Integer fk_Localization;
 // private Integer fk_EventUsers;
 // private Integer fk_Category;
 
@@ -84,7 +88,15 @@ public class Event  implements Serializable{
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+/*
+	public Address getAddress() {
+		return adress_id;
+	}
 
+	public void setAddress(Address adress_id) {
+		this.adress_id = adress_id;
+	}
+*/
 	@Override
 	public int hashCode() {
 		final int prime = 31;
