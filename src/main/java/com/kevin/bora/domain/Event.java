@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Event  implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -20,6 +22,7 @@ public class Event  implements Serializable{
 	private String date;
 	private String time;
 	
+	@JsonBackReference	
 	@ManyToOne
 	@JoinColumn(name="category_id")
 	private Category category;
