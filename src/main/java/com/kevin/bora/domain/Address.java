@@ -89,16 +89,22 @@ public class Address implements Serializable{
 	public void setCity(City city) {
 		this.city = city;
 	}
-
-/*
-	public Event getevent() {
-		return event;
+	
+	public List<User> getUsers() {
+		return users;
 	}
 
-	public void setevent(Event event) {
-		this.event = event;
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
-*/
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
 
 	@Override
 	public int hashCode() {

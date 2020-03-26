@@ -1,19 +1,17 @@
 package com.kevin.bora.domain.enums;
 
-public enum Permission {
-
-	NOTMEMBER(0, "Not a member"),
-	OWNER(1, "Owner"),
-	MANAGER(2, "Manager"),
-	USER(3, "User"),
-	LIMITEDUSER(4, "Limited User"),
-	BLOQUEAD(5, "Bloquead");
+public enum Participation {
 	
+	NOTHING(0, "Nothing"),
+	FOLLOWER(1, "Follower"),
+	ACTIVE(2, "Active"),
+	MEMBER(3,"Member"),
+	HIGHMEMBER(4, "High level member");
 	
 	private int cod;
 	private String description;
 	
-	private Permission(int cod, String description) {
+	private Participation(int cod, String description) {
 		this.cod = cod;
 		this.description = description;		
 	}
@@ -25,11 +23,11 @@ public enum Permission {
 	public String getDescription() {
 		return description;
 	}
-	public static Permission toEnum(Integer cod) {
+	public static Participation toEnum(Integer cod) {
 		if(cod == null) {
 			return null;
 		}	
-		for(Permission x : Permission.values()) {
+		for(Participation x : Participation.values()) {
 			if(cod.equals(x.getCod()));
 				return x;
 		}

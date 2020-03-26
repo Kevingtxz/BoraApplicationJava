@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -31,8 +32,13 @@ public class Event  implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="address_id")
 	private Address address;
+	
+	@JsonBackReference
+	@OneToOne
+	@JoinColumn(name="eventusers_id")
+	private EventUsers eventUsers;
 
-/*
+	/*
 	@OneToMany
 	private List<Status> status = new ArrayList<>();
 	
@@ -103,6 +109,14 @@ public class Event  implements Serializable{
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+
+	public EventUsers getEventUsers() {
+		return eventUsers;
+	}
+
+	public void setEventUsers(EventUsers eventUsers) {
+		this.eventUsers = eventUsers;
 	}
 
 	@Override

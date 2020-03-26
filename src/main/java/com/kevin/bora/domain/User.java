@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.kevin.bora.domain.enums.Permission;
@@ -34,14 +35,20 @@ public class User implements Serializable{
 	private Integer permission; 
 	
 	@ElementCollection
-	@CollectionTable(name="PHONE")
+	@CollectionTable(name="Phones")
 	private Set<String> phones = new HashSet<>();
 
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="address_id")
 	private Address address;
-/*
+	
+	@JsonBackReference
+	@OneToOne
+	@JoinColumn(name="eventUsers_id")
+	private EventUsers eventUsers;
+
+	/*
 	@ManyToMany
 	private List<Event> myEvents = new ArrayList<>();
 
@@ -160,6 +167,18 @@ public class User implements Serializable{
 		this.permission = permission.getCod();
 	}
 	
+	public void setPermission(Integer permission) {
+		this.permission = permission;
+	}
+
+	public EventUsers getEventUsers() {
+		return eventUsers;
+	}
+
+	public void setEventUsers(EventUsers eventUsers) {
+		this.eventUsers = eventUsers;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

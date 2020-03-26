@@ -11,13 +11,16 @@ import com.kevin.bora.domain.Address;
 import com.kevin.bora.domain.Category;
 import com.kevin.bora.domain.City;
 import com.kevin.bora.domain.Event;
+import com.kevin.bora.domain.EventUsers;
 import com.kevin.bora.domain.State;
 import com.kevin.bora.domain.User;
+import com.kevin.bora.domain.enums.Participation;
 import com.kevin.bora.domain.enums.Permission;
 import com.kevin.bora.repositories.AddressRepository;
 import com.kevin.bora.repositories.CategoryRepository;
 import com.kevin.bora.repositories.CityRepository;
 import com.kevin.bora.repositories.EventRepository;
+import com.kevin.bora.repositories.EventUsersRepository;
 import com.kevin.bora.repositories.StateRepository;
 import com.kevin.bora.repositories.UserRepository;
 
@@ -36,6 +39,8 @@ public class BoraApplication implements CommandLineRunner{
 	private AddressRepository addressRepository;
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private EventUsersRepository eventUsersRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(BoraApplication.class, args);
@@ -79,12 +84,17 @@ public class BoraApplication implements CommandLineRunner{
 		u1.getPhones().addAll(Arrays.asList("90909090"));
 		u2.getPhones().addAll(Arrays.asList("50909090"));
 		u3.getPhones().addAll(Arrays.asList("00909090"));
-		
+
+		EventUsers eu1 = new EventUsers(null, Permission.OWNER, Participation.HIGHMEMBER, u1, e4);
+		EventUsers eu2 = new EventUsers(null, Permission.NOTMEMBER, Participation.NOTHING, u2, e1);
+		EventUsers eu3 = new EventUsers(null, Permission.LIMITEDUSER, Participation.ACTIVE, u3, e1);
+
 		stateRepository.saveAll(Arrays.asList(s1, s2, s3));
 		cityRepository.saveAll(Arrays.asList(c1, c2, c3));
 		addressRepository.saveAll(Arrays.asList(a1, a2, a3));
 		userRepository.saveAll(Arrays.asList(u1, u2, u3));
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2));
 		eventRepository.saveAll(Arrays.asList(e1, e2, e3, e4));
+		eventUsersRepository.saveAll(Arrays.asList(eu1, eu2, eu3));
 	}
 }
