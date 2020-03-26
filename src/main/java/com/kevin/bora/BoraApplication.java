@@ -67,7 +67,11 @@ public class BoraApplication implements CommandLineRunner{
 		User u3 = new User(null, "Walter", "Vargas", "25/03", "waltinho@wal.com", "soco", "vrawl", true, Permission.MANAGER, a2);
 
 		Category cat1 = new Category(null, "Sport");
-		Category cat2 = new Category(null, "Party");
+		Category cat2 = new Category(null, "Party");	
+		Category cat3 = new Category(null, "Sport3");
+		Category cat4 = new Category(null, "Party4");	
+		Category cat5 = new Category(null, "Sport5");
+		Category cat6 = new Category(null, "Party6");
 
 		Event e1 = new Event(null, "Futebol", "24/03/2020", "22:53", cat1, a1);
 		Event e2 = new Event(null, "Vôlei", "21/10/2020", "22:53", cat1, a2);
@@ -76,6 +80,10 @@ public class BoraApplication implements CommandLineRunner{
 		
 		cat1.getEvents().addAll(Arrays.asList(e1,e2));
 		cat2.getEvents().addAll(Arrays.asList(e3, e4));
+		cat3.getEvents().addAll(Arrays.asList(e1,e2, e3));
+		cat4.getEvents().addAll(Arrays.asList(e3));
+		cat5.getEvents().addAll(Arrays.asList(e1));
+		cat6.getEvents().addAll(Arrays.asList(e3, e4, e1, e2));
 		
 		s1.getCities().addAll(Arrays.asList(c1));
 		s2.getCities().addAll(Arrays.asList(c2));
@@ -93,7 +101,7 @@ public class BoraApplication implements CommandLineRunner{
 		cityRepository.saveAll(Arrays.asList(c1, c2, c3));
 		addressRepository.saveAll(Arrays.asList(a1, a2, a3));
 		userRepository.saveAll(Arrays.asList(u1, u2, u3));
-		categoryRepository.saveAll(Arrays.asList(cat1, cat2));
+		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6));
 		eventRepository.saveAll(Arrays.asList(e1, e2, e3, e4));
 		eventUsersRepository.saveAll(Arrays.asList(eu1, eu2, eu3));
 	}
