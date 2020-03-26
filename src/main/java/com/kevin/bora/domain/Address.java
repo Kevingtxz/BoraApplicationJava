@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 public class Address implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -30,11 +28,9 @@ public class Address implements Serializable{
 	@JoinColumn(name="city_id")
 	private City city;
 	
-	@JsonManagedReference
 	@OneToMany(mappedBy="address")
 	private List<User> users = new ArrayList<>();
 	
-	@JsonManagedReference
 	@OneToMany(mappedBy="address")
 	private List<Event> events= new ArrayList<>();
 		

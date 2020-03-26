@@ -14,7 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kevin.bora.domain.enums.Permission;
 
 @Entity
@@ -38,12 +38,12 @@ public class User implements Serializable{
 	@CollectionTable(name="Phones")
 	private Set<String> phones = new HashSet<>();
 
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="address_id")
 	private Address address;
 	
-	@JsonBackReference
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name="eventUsers_id")
 	private EventUsers eventUsers;

@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 public class Category implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -21,7 +19,6 @@ public class Category implements Serializable{
 	private Integer id;
 	private String name;
 	
-	@JsonManagedReference
 	@OneToMany(mappedBy="category")
 	private List<Event> events = new ArrayList<>();
 	

@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Event  implements Serializable{
@@ -23,17 +23,17 @@ public class Event  implements Serializable{
 	private String date;
 	private String time;
 	
-	@JsonBackReference	
+	@JsonIgnore	
 	@ManyToOne
 	@JoinColumn(name="category_id")
 	private Category category;
 	
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="address_id")
 	private Address address;
 	
-	@JsonBackReference
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name="eventusers_id")
 	private EventUsers eventUsers;
