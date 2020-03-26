@@ -18,7 +18,7 @@ public class EventUsersResource {
 	private EventUsersService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<EventUsers> find(@PathVariable Integer id) {
 		EventUsers obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
