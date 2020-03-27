@@ -38,8 +38,8 @@ public class EventUsers implements Serializable{
 		this.id = id;
 		this.user = user;
 		this.event = event;
-		this.permission = permission.getCod();
-		this.participation = participation.getCod();
+		this.permission =  (permission==null) ? null : permission.getCod();
+		this.participation =  (permission==null) ? null : participation.getCod();
 	}
 
 	public Integer getId() {

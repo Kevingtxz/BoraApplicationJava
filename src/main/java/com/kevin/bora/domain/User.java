@@ -42,8 +42,8 @@ public class User implements Serializable{
 
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="address_id")
-	private Address address;
+	@JoinColumn(name="city_id")
+	private City city;
 	
 	@JsonIgnore
 	@OneToOne
@@ -67,7 +67,7 @@ public class User implements Serializable{
 	}
 	
 	public User(Integer id, String userName, String name, String lastName, String birth, String email, String password, String notes,
-		String gender, Permission permission, Address address) {
+		String gender, Permission permission, City city) {
 		super();
 		this.id = id;
 		this.userName = userName;
@@ -78,8 +78,8 @@ public class User implements Serializable{
 		this.password = password;
 		this.notes = notes;
 		this.gender = gender;
-		this.permission = (permission==null) ? null : permission.getCod();
-		this.address = address;
+		this.permission =permission.getCod();
+		this.city = city;
 	}
 	
 	public Integer getId() {
@@ -154,21 +154,20 @@ public class User implements Serializable{
 		this.phones = phones;
 	}
 	
-	public Address getAddress() {
-		return address;
+	public City getCity () {
+		return city;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setCity (City city) {
+		this.city = city;
 	}
 
-	public Permission getPermission() {
-		return (permission==null) ? null :Permission.toEnum(permission);
+	public Integer getPermission() {
+		return permission;
 	}
 
-	public void setPermission(Permission permission) {
-		
-		this.permission = (permission==null) ? null :permission.getCod();
+	public void setPermission(Integer permission) {
+		this.permission = permission;
 	}
 
 	public EventUsers getEventUsers() {

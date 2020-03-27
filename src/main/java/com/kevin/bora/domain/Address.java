@@ -1,8 +1,6 @@
 package com.kevin.bora.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Address implements Serializable{
@@ -27,12 +24,6 @@ public class Address implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="city_id")
 	private City city;
-	
-	@OneToMany(mappedBy="address")
-	private List<User> users = new ArrayList<>();
-	
-	@OneToMany(mappedBy="address")
-	private List<Event> events= new ArrayList<>();
 		
 	public Address() {
 	}
@@ -84,22 +75,6 @@ public class Address implements Serializable{
 
 	public void setCity(City city) {
 		this.city = city;
-	}
-	
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
-
-	public List<Event> getEvents() {
-		return events;
-	}
-
-	public void setEvents(List<Event> events) {
-		this.events = events;
 	}
 
 	@Override

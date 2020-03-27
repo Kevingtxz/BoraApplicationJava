@@ -6,10 +6,9 @@ import javax.validation.constraints.Email;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.kevin.bora.domain.Address;
+import com.kevin.bora.domain.City;
 import com.kevin.bora.domain.EventUsers;
 import com.kevin.bora.domain.User;
-import com.kevin.bora.domain.enums.Permission;
 
 public class UserDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -25,8 +24,8 @@ public class UserDTO implements Serializable{
 	private String password;
 	@Length(max=300, message="O tamnho deve ser entre 0 e 300 caracteres")
 	private String notes;
-	private Permission permission; 
-	private Address address;
+	private Integer permission; 
+	private City city;
 	private EventUsers eventUsers;
 	private String gender;
 
@@ -41,7 +40,7 @@ public class UserDTO implements Serializable{
 		this.notes = obj.getNotes();
 		this.setGender(obj.getGender());
 		this.permission = obj.getPermission();
-		this.address = obj.getAddress();
+		this.city = obj.getCity();
 	}
 
 	public Integer getId() {
@@ -84,20 +83,20 @@ public class UserDTO implements Serializable{
 		this.notes = notes;
 	}
 
-	public Permission getPermission() {
+	public Integer getPermission() {
 		return permission;
 	}
 
-	public void setPermission(Permission permission) {
+	public void setPermission(Integer permission) {
 		this.permission = permission;
 	}
 
-	public Address getAddress() {
-		return address;
+	public City getCity() {
+		return city;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setCity(City city) {
+		this.city = city;
 	}
 
 	public EventUsers getEventUsers() {

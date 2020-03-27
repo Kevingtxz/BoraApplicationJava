@@ -62,9 +62,9 @@ public class BoraApplication implements CommandLineRunner{
 		Address a3 = new Address(null, "24", "Grey", "Rio Grande", c3);
 		
 		
-		User u1 = new User(null, "Kevingtxz", "Kevin", "Gonçalves", "21/10", "kevingtxz@gmail.com", "ratao", "macaco", "M", Permission.OWNER, a1);
-		User u2 = new User(null, "BUGZONA", "Bug", "Mello", "10/2", "melo@hotmail.com", "vaca", "sapo", "F", Permission.BLOQUEAD, a3);
-		User u3 = new User(null, "Jack Tatue", "Walter", "Vargas", "25/03", "waltinho@wal.com", "soco", "vrawl", "M", Permission.MANAGER, a2);
+		User u1 = new User(null, "Kevingtxz", "Kevin", "Gonçalves", "21/10", "kevingtxz@gmail.com", "ratao", "macaco", "M", Permission.OWNER, c1);
+		User u2 = new User(null, "BUGZONA", "Bug", "Mello", "10/2", "melo@hotmail.com", "vaca", "sapo", "F", Permission.BLOQUEAD, c1);
+		User u3 = new User(null, "Jack Tatue", "Walter", "Vargas", "25/03", "waltinho@wal.com", "soco", "vrawl", "M", Permission.MANAGER, c1);
 
 		Category cat1 = new Category(null, "Sport");
 		Category cat2 = new Category(null, "Party");	
@@ -73,10 +73,10 @@ public class BoraApplication implements CommandLineRunner{
 		Category cat5 = new Category(null, "Sport5");
 		Category cat6 = new Category(null, "Party6");
 
-		Event e1 = new Event(null, "Futebol", "24/03/2020", "22:53", cat1, a1);
-		Event e2 = new Event(null, "Vôlei", "21/10/2020", "22:53", cat1, a2);
-		Event e3 = new Event(null, "Boate", "01/01/2020", "22:53", cat2, a2);
-		Event e4 = new Event(null, "Axe", "20/01/2020", "22:53", cat2, a1);
+		Event e1 = new Event(null, "Futebol", "24/03/2020", "22:53", cat1, c1);
+		Event e2 = new Event(null, "Vôlei", "21/10/2020", "22:53", cat1, c2);
+		Event e3 = new Event(null, "Boate", "01/01/2020", "22:53", cat2, c2);
+		Event e4 = new Event(null, "Axe", "20/01/2020", "22:53", cat2, c1);
 		
 		cat1.getEvents().addAll(Arrays.asList(e1,e2));
 		cat2.getEvents().addAll(Arrays.asList(e3, e4));

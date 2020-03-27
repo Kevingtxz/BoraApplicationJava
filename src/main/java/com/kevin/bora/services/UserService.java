@@ -10,8 +10,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.kevin.bora.domain.City;
 import com.kevin.bora.domain.User;
+import com.kevin.bora.domain.enums.Permission;
 import com.kevin.bora.dto.UserDTO;
+import com.kevin.bora.dto.UserNewDTO;
+import com.kevin.bora.repositories.CityRepository;
 import com.kevin.bora.repositories.UserRepository;
 import com.kevin.bora.services.exceptions.DataIntegrityException;
 import com.kevin.bora.services.exceptions.ObjectNotFoundException;
@@ -21,11 +25,19 @@ public class UserService {
 
 	@Autowired
 	private UserRepository repo;
+	@Autowired
+	private CityRepository cityRepository;
+	
 	
 	public User find( Integer id ) {
 		Optional<User> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Object not find! Id: " + id + ", Type: " + User.class.getName()));
+	}
+	
+	public User insert(User obj) {
+		obj.setId(null);
+		return repo.save(obj);
 	}
 	
 	public User update(User obj) {
@@ -55,7 +67,25 @@ public class UserService {
 	
 	public User fromDTO(UserDTO objDto) {
 		return new User(
-				objDto.getId(), objDto.getUserName(), null, null, null, objDto.getEmail(), objDto.getPassword(), objDto.getNotes(), objDto.getGender(), objDto.getPermission(),objDto.getAddress());
+				objDto.getId(), 
+				objDto.getUserName(), null, null, null, 
+				objDto.getEmail(), 
+				objDto.getPassword(), 
+				objDto.getNotes(), 
+				objDto.getGender(), 
+				Permission.toEnum(objDto.getPermission()),
+				objDto.getCity());
+	}
+	
+	public User fromDTO(UserNewDTO objDto) {
+		Optional<City> city = cityRepository.findById(objDto.getCityId());	
+		User user  = new User(null, objDto.getUserName(), objDto.getName(), objDto.getLastName(), objDto.getBirth(), objDto.getEmail(), 
+				objDto.getPassword(), objDto.getNotes(), objDto.getGender(), Permission.toEnum(objDto.getPermission()), city.orElse(null));		
+		user.getPhones().add(objDto.getPhone1());
+		if(objDto.getPhone2() != null) {
+			user.getPhones().add(objDto.getPhone2());
+		}
+		return user;
 	}
 	
 	private void updataData(User newObj, User obj) {
@@ -78,8 +108,8 @@ public class UserService {
 		if(newObj.getPermission() != null) {
 			newObj.setPermission(obj.getPermission());
 		}
-		if(obj.getAddress() != null) {
-			newObj.setAddress(obj.getAddress());
+		if(obj.getCity() != null) {
+			newObj.setCity(obj.getCity());
 		}			
 	}	
 }
