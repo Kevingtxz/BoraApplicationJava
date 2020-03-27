@@ -51,16 +51,11 @@ public class User implements Serializable{
 	private EventUsers eventUsers;
 
 	/*
-	@ManyToMany
-	private List<Event> myEvents = new ArrayList<>();
+	@JsonIgnore
+	@OneToOne
+	@JoinColumn(name="mainPageUser_id")
+	private MainPageUser mainPageUser;
 
-	@OneToMany
- 	private List<Status> myEvents = new ArrayList<>();
-
- 	@OneToMany
- 	private List<PostBora> myPosts = new ArrayList<>();
- 	
- 	@OneToMany
  	private List<Location> location = new ArrayList<>();
 */		
 	public User() {
@@ -185,7 +180,15 @@ public class User implements Serializable{
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	/*
+	public MainPageUser getMainPageUser() {
+		return mainPageUser;
+	}
 
+	public void setMainPageUser(MainPageUser mainPageUser) {
+		this.mainPageUser = mainPageUser;
+	}
+	*/
 	@Override
 	public int hashCode() {
 		final int prime = 31;

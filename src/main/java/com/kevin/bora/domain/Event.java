@@ -37,18 +37,12 @@ public class Event  implements Serializable{
 	@OneToOne
 	@JoinColumn(name="eventusers_id")
 	private EventUsers eventUsers;
-
 	/*
-	@OneToMany
-	private List<Status> status = new ArrayList<>();
-	
-	@OneToMany
-	private List<Category> = new ArrayList<>();
-	
-	
-	@ManyToMany
-	private List<Users> users = new ArrayList<>();
-*/
+	@JsonIgnore
+	@OneToOne
+	@JoinColumn(name="mainPageEvent_id")
+	private MainPageEvent mainPageEvent;
+	*/
 	public Event() {
 	}
 
@@ -62,7 +56,6 @@ public class Event  implements Serializable{
 	this.address = address;
 }
 
-	
 	public Integer getId() {
 		return id;
 	}
@@ -118,7 +111,15 @@ public class Event  implements Serializable{
 	public void setEventUsers(EventUsers eventUsers) {
 		this.eventUsers = eventUsers;
 	}
+	/*
+	public MainPageEvent getMainPageEvent() {
+		return mainPageEvent;
+	}
 
+	public void setMainPageEvent(MainPageEvent mainPageEvent) {
+		this.mainPageEvent = mainPageEvent;
+	}
+	*/
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -143,7 +144,4 @@ public class Event  implements Serializable{
 			return false;
 		return true;
 	}
-	
-	 
-	
 }
