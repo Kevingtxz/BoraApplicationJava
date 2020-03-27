@@ -24,16 +24,18 @@ public class User implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	private String userName;
 	private String name;
 	private String lastName;
 	private String birth;
 	private String email;
 	private String password;
 	private String notes;
-	private boolean gender;
+	private String gender;
 	
 	private Integer permission; 
 	
+	@JsonIgnore
 	@ElementCollection
 	@CollectionTable(name="Phones")
 	private Set<String> phones = new HashSet<>();
@@ -64,10 +66,11 @@ public class User implements Serializable{
 	public User() {
 	}
 	
-	public User(Integer id, String name, String lastName, String birth, String email, String password, String notes,
-		boolean gender, Permission permission, Address address) {
+	public User(Integer id, String userName, String name, String lastName, String birth, String email, String password, String notes,
+		String gender, Permission permission, Address address) {
 		super();
 		this.id = id;
+		this.userName = userName;
 		this.name = name;
 		this.lastName = lastName;
 		this.birth = birth;
@@ -75,7 +78,7 @@ public class User implements Serializable{
 		this.password = password;
 		this.notes = notes;
 		this.gender = gender;
-		this.permission = permission.getCod();
+		this.permission = (permission==null) ? null : permission.getCod();
 		this.address = address;
 	}
 	
@@ -135,11 +138,11 @@ public class User implements Serializable{
 		this.notes = notes;
 	}
 	
-	public boolean isGender() {
+	public String getGender() {
 		return gender;
 	}
 	
-	public void setGender(boolean gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
@@ -158,17 +161,14 @@ public class User implements Serializable{
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	
+
 	public Permission getPermission() {
-		return Permission.toEnum(permission);
+		return (permission==null) ? null :Permission.toEnum(permission);
 	}
 
 	public void setPermission(Permission permission) {
-		this.permission = permission.getCod();
-	}
-	
-	public void setPermission(Integer permission) {
-		this.permission = permission;
+		
+		this.permission = (permission==null) ? null :permission.getCod();
 	}
 
 	public EventUsers getEventUsers() {
@@ -177,6 +177,14 @@ public class User implements Serializable{
 
 	public void setEventUsers(EventUsers eventUsers) {
 		this.eventUsers = eventUsers;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	@Override

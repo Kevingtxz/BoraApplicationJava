@@ -62,9 +62,9 @@ public class BoraApplication implements CommandLineRunner{
 		Address a3 = new Address(null, "24", "Grey", "Rio Grande", c3);
 		
 		
-		User u1 = new User(null, "Kevin", "Gonçalves", "21/10", "kevingtxz@gmail.com", "ratao", "macaco", true, Permission.OWNER, a1);
-		User u2 = new User(null, "Bug", "Mello", "10/2", "melo@hotmail.com", "vaca", "sapo", false, Permission.BLOQUEAD, a3);
-		User u3 = new User(null, "Walter", "Vargas", "25/03", "waltinho@wal.com", "soco", "vrawl", true, Permission.MANAGER, a2);
+		User u1 = new User(null, "Kevingtxz", "Kevin", "Gonçalves", "21/10", "kevingtxz@gmail.com", "ratao", "macaco", "M", Permission.OWNER, a1);
+		User u2 = new User(null, "BUGZONA", "Bug", "Mello", "10/2", "melo@hotmail.com", "vaca", "sapo", "F", Permission.BLOQUEAD, a3);
+		User u3 = new User(null, "Jack Tatue", "Walter", "Vargas", "25/03", "waltinho@wal.com", "soco", "vrawl", "M", Permission.MANAGER, a2);
 
 		Category cat1 = new Category(null, "Sport");
 		Category cat2 = new Category(null, "Party");	
