@@ -1,16 +1,19 @@
 package com.kevin.bora.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class City implements Serializable{
+public class Neighborhood implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -18,18 +21,17 @@ public class City implements Serializable{
 	private Integer id;
 	private String name;
 	
-	@ManyToOne
-	@JoinColumn(name="estado_id")
-	private State state;
+	@JsonIgnore
+	@OneToMany(mappedBy="neighborhood")
+	private List<Address> addresses = new ArrayList<>();
 	
-	public City() {
+	public Neighborhood() {
 	}
 
-	public City(Integer id, String name, State state) {
+	public Neighborhood(Integer id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.state = state;
 	}
 
 	public Integer getId() {
@@ -48,14 +50,14 @@ public class City implements Serializable{
 		this.name = name;
 	}
 
-	public State getState() {
-		return state;
+	public List<Address> getAddresses() {
+		return addresses;
 	}
 
-	public void setState(State state) {
-		this.state = state;
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -72,7 +74,7 @@ public class City implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		City other = (City) obj;
+		Neighborhood other = (Neighborhood) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

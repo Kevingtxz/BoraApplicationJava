@@ -6,7 +6,7 @@ import javax.validation.constraints.Email;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.kevin.bora.domain.City;
+import com.kevin.bora.domain.Address;
 import com.kevin.bora.domain.EventUsers;
 import com.kevin.bora.domain.User;
 
@@ -25,7 +25,7 @@ public class UserDTO implements Serializable{
 	@Length(max=300, message="O tamnho deve ser entre 0 e 300 caracteres")
 	private String notes;
 	private Integer permission; 
-	private City city;
+	private Address address;
 	private EventUsers eventUsers;
 	private String gender;
 
@@ -40,7 +40,7 @@ public class UserDTO implements Serializable{
 		this.notes = obj.getNotes();
 		this.setGender(obj.getGender());
 		this.permission = obj.getPermission();
-		this.city = obj.getCity();
+		this.address = obj.getAddress();
 	}
 
 	public Integer getId() {
@@ -91,12 +91,12 @@ public class UserDTO implements Serializable{
 		this.permission = permission;
 	}
 
-	public City getCity() {
-		return city;
+	public Address getAddress() {
+		return address;
 	}
 
-	public void setCity(City city) {
-		this.city = city;
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	public EventUsers getEventUsers() {

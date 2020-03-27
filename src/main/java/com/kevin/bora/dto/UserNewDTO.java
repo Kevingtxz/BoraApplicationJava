@@ -19,7 +19,7 @@ public class UserNewDTO implements Serializable{
 	private String complement;
 	private String neighborhood;
 
-	private Integer cityId;
+	private Integer addressId;
 	
 	private String phone1;
 	private String phone2;
@@ -123,12 +123,12 @@ public class UserNewDTO implements Serializable{
 		this.neighborhood = neighborhood;
 	}
 
-	public Integer getCityId() {
-		return cityId;
+	public Integer getAddressId() {
+		return addressId;
 	}
 
-	public void setCityId(Integer cityId) {
-		this.cityId = cityId;
+	public void setAddressId(Integer addressId) {
+		this.addressId = addressId;
 	}
 
 	public String getPhone1() {

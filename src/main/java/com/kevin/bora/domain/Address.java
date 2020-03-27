@@ -1,13 +1,17 @@
 package com.kevin.bora.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Address implements Serializable{
@@ -18,17 +22,26 @@ public class Address implements Serializable{
 	private Integer id;
 	private String number;
 	private String complement;
-	private String neighborhood;
-	
 	
 	@ManyToOne
 	@JoinColumn(name="city_id")
 	private City city;
+	
+	@ManyToOne
+	@JoinColumn(name="neighborhood_id")
+	private Neighborhood neighborhood;
+	
+	@OneToMany(mappedBy="address", cascade=CascadeType.ALL)
+	private List<User> users = new ArrayList<>();
+	
+	@OneToMany(mappedBy="address", cascade=CascadeType.ALL)
+	private List<Event> events= new ArrayList<>();
+
 		
 	public Address() {
 	}
 	
-	public Address(Integer id, String number, String complement, String neighborhood, City city) {
+	public Address(Integer id, String number, String complement, Neighborhood neighborhood, City city) {
 		super();
 		this.id = id;
 		this.number = number;
@@ -61,11 +74,11 @@ public class Address implements Serializable{
 		this.complement = complement;
 	}
 
-	public String getNeighborhood() {
+	public Neighborhood getNeighborhood() {
 		return neighborhood;
 	}
 
-	public void setNeighborhood(String neighborhood) {
+	public void setNeighborhood(Neighborhood neighborhood) {
 		this.neighborhood = neighborhood;
 	}
 	
@@ -101,5 +114,4 @@ public class Address implements Serializable{
 			return false;
 		return true;
 	}
-
 }

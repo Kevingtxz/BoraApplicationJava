@@ -42,8 +42,8 @@ public class User implements Serializable{
 
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="city_id")
-	private City city;
+	@JoinColumn(name="address_id")
+	private Address address;
 	
 	@JsonIgnore
 	@OneToOne
@@ -67,7 +67,7 @@ public class User implements Serializable{
 	}
 	
 	public User(Integer id, String userName, String name, String lastName, String birth, String email, String password, String notes,
-		String gender, Permission permission, City city) {
+		String gender, Permission permission, Address address) {
 		super();
 		this.id = id;
 		this.userName = userName;
@@ -79,7 +79,7 @@ public class User implements Serializable{
 		this.notes = notes;
 		this.gender = gender;
 		this.permission =permission.getCod();
-		this.city = city;
+		this.address = address;
 	}
 	
 	public Integer getId() {
@@ -154,12 +154,12 @@ public class User implements Serializable{
 		this.phones = phones;
 	}
 	
-	public City getCity () {
-		return city;
+	public Address getAddress() {
+		return address;
 	}
 
-	public void setCity (City city) {
-		this.city = city;
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	public Integer getPermission() {

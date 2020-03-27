@@ -12,6 +12,7 @@ import com.kevin.bora.domain.Category;
 import com.kevin.bora.domain.City;
 import com.kevin.bora.domain.Event;
 import com.kevin.bora.domain.EventUsers;
+import com.kevin.bora.domain.Neighborhood;
 import com.kevin.bora.domain.State;
 import com.kevin.bora.domain.User;
 import com.kevin.bora.domain.enums.Participation;
@@ -21,6 +22,7 @@ import com.kevin.bora.repositories.CategoryRepository;
 import com.kevin.bora.repositories.CityRepository;
 import com.kevin.bora.repositories.EventRepository;
 import com.kevin.bora.repositories.EventUsersRepository;
+import com.kevin.bora.repositories.NeighborhoodRepository;
 import com.kevin.bora.repositories.StateRepository;
 import com.kevin.bora.repositories.UserRepository;
 
@@ -41,6 +43,8 @@ public class BoraApplication implements CommandLineRunner{
 	private UserRepository userRepository;
 	@Autowired
 	private EventUsersRepository eventUsersRepository;
+	@Autowired
+	private NeighborhoodRepository neighborhoodRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(BoraApplication.class, args);
@@ -56,15 +60,19 @@ public class BoraApplication implements CommandLineRunner{
 		City c1 = new City(null, "Macaé", s1);
 		City c2 = new City(null, "São Paulo", s2);
 		City c3 = new City(null, "Rio Grande", s3);
+
+		Neighborhood n1 = new Neighborhood(null, "Mirante da Lagoa");
+		Neighborhood n2 = new Neighborhood(null, "Cassino");
+		Neighborhood n3 = new Neighborhood(null, "Lagomar");
 		
-		Address a1 = new Address(null, "1024", "White House", "Mirante Da Lagoa", c1);
-		Address a2 = new Address(null, "108", "Black", "Lagomar", c1);
-		Address a3 = new Address(null, "24", "Grey", "Rio Grande", c3);
+		Address a1 = new Address(null, "1024", "White House", n1, c1);
+		Address a2 = new Address(null, "108", "Black", n3, c1);
+		Address a3 = new Address(null, "24", "Grey", n2, c3);
 		
 		
-		User u1 = new User(null, "Kevingtxz", "Kevin", "Gonçalves", "21/10", "kevingtxz@gmail.com", "ratao", "macaco", "M", Permission.OWNER, c1);
-		User u2 = new User(null, "BUGZONA", "Bug", "Mello", "10/2", "melo@hotmail.com", "vaca", "sapo", "F", Permission.BLOQUEAD, c1);
-		User u3 = new User(null, "Jack Tatue", "Walter", "Vargas", "25/03", "waltinho@wal.com", "soco", "vrawl", "M", Permission.MANAGER, c1);
+		User u1 = new User(null, "Kevingtxz", "Kevin", "Gonçalves", "21/10", "kevingtxz@gmail.com", "ratao", "macaco", "M", Permission.OWNER, a3);
+		User u2 = new User(null, "BUGZONA", "Bug", "Mello", "10/2", "melo@hotmail.com", "vaca", "sapo", "F", Permission.BLOQUEAD, a2);
+		User u3 = new User(null, "Jack Tatue", "Walter", "Vargas", "25/03", "waltinho@wal.com", "soco", "vrawl", "M", Permission.MANAGER, a1);
 
 		Category cat1 = new Category(null, "Sport");
 		Category cat2 = new Category(null, "Party");	
@@ -73,10 +81,10 @@ public class BoraApplication implements CommandLineRunner{
 		Category cat5 = new Category(null, "Sport5");
 		Category cat6 = new Category(null, "Party6");
 
-		Event e1 = new Event(null, "Futebol", "24/03/2020", "22:53", cat1, c1);
-		Event e2 = new Event(null, "Vôlei", "21/10/2020", "22:53", cat1, c2);
-		Event e3 = new Event(null, "Boate", "01/01/2020", "22:53", cat2, c2);
-		Event e4 = new Event(null, "Axe", "20/01/2020", "22:53", cat2, c1);
+		Event e1 = new Event(null, "Futebol", "24/03/2020", "22:53", cat1, a1);
+		Event e2 = new Event(null, "Vôlei", "21/10/2020", "22:53", cat1, a2);
+		Event e3 = new Event(null, "Boate", "01/01/2020", "22:53", cat2, a2);
+		Event e4 = new Event(null, "Axe", "20/01/2020", "22:53", cat2, a1);
 		
 		cat1.getEvents().addAll(Arrays.asList(e1,e2));
 		cat2.getEvents().addAll(Arrays.asList(e3, e4));
@@ -99,6 +107,7 @@ public class BoraApplication implements CommandLineRunner{
 
 		stateRepository.saveAll(Arrays.asList(s1, s2, s3));
 		cityRepository.saveAll(Arrays.asList(c1, c2, c3));
+		neighborhoodRepository.saveAll(Arrays.asList(n1, n2, n3));
 		addressRepository.saveAll(Arrays.asList(a1, a2, a3));
 		userRepository.saveAll(Arrays.asList(u1, u2, u3));
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6));

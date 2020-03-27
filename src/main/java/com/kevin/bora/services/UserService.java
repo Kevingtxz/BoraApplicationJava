@@ -10,12 +10,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import com.kevin.bora.domain.City;
+import com.kevin.bora.domain.Address;
 import com.kevin.bora.domain.User;
 import com.kevin.bora.domain.enums.Permission;
 import com.kevin.bora.dto.UserDTO;
 import com.kevin.bora.dto.UserNewDTO;
-import com.kevin.bora.repositories.CityRepository;
+import com.kevin.bora.repositories.AddressRepository;
 import com.kevin.bora.repositories.UserRepository;
 import com.kevin.bora.services.exceptions.DataIntegrityException;
 import com.kevin.bora.services.exceptions.ObjectNotFoundException;
@@ -26,7 +26,7 @@ public class UserService {
 	@Autowired
 	private UserRepository repo;
 	@Autowired
-	private CityRepository cityRepository;
+	private AddressRepository addressRepository;
 	
 	
 	public User find( Integer id ) {
@@ -74,13 +74,13 @@ public class UserService {
 				objDto.getNotes(), 
 				objDto.getGender(), 
 				Permission.toEnum(objDto.getPermission()),
-				objDto.getCity());
+				objDto.getAddress());
 	}
 	
 	public User fromDTO(UserNewDTO objDto) {
-		Optional<City> city = cityRepository.findById(objDto.getCityId());	
+		Optional<Address> address = addressRepository.findById(objDto.getAddressId());	
 		User user  = new User(null, objDto.getUserName(), objDto.getName(), objDto.getLastName(), objDto.getBirth(), objDto.getEmail(), 
-				objDto.getPassword(), objDto.getNotes(), objDto.getGender(), Permission.toEnum(objDto.getPermission()), city.orElse(null));		
+				objDto.getPassword(), objDto.getNotes(), objDto.getGender(), Permission.toEnum(objDto.getPermission()), address.orElse(null));		
 		user.getPhones().add(objDto.getPhone1());
 		if(objDto.getPhone2() != null) {
 			user.getPhones().add(objDto.getPhone2());
@@ -108,8 +108,8 @@ public class UserService {
 		if(newObj.getPermission() != null) {
 			newObj.setPermission(obj.getPermission());
 		}
-		if(obj.getCity() != null) {
-			newObj.setCity(obj.getCity());
+		if(obj.getAddress() != null) {
+			newObj.setAddress(obj.getAddress());
 		}			
 	}	
 }
