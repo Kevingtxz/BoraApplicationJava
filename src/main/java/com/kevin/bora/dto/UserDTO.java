@@ -9,7 +9,9 @@ import org.hibernate.validator.constraints.Length;
 import com.kevin.bora.domain.Address;
 import com.kevin.bora.domain.EventUsers;
 import com.kevin.bora.domain.User;
+import com.kevin.bora.services.validation.UserUpdate;
 
+@UserUpdate
 public class UserDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 

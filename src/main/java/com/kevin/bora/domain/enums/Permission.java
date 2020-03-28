@@ -2,13 +2,11 @@ package com.kevin.bora.domain.enums;
 
 public enum Permission {
 
-	NOTMEMBER(0, "Not a member"),
-	OWNER(1, "Owner"),
-	MANAGER(2, "Manager"),
-	USER(3, "User"),
-	LIMITEDUSER(4, "Limited User"),
-	BLOQUEAD(5, "Bloquead");
-	
+	USER(0, "Usuário Padrão"),
+	OWNER(1, "Proprietário"),
+	MANAGER(2, "Gerente"),
+	LIMITEDUSER(4, "Uso limitado"),
+	BLOQUEAD(5, "Bloqueado");	
 	
 	private int cod;
 	private String description;

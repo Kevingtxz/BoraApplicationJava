@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,16 +25,19 @@ public class User implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String userName;
 	private String name;
 	private String lastName;
 	private String birth;
-	private String email;
 	private String password;
 	private String notes;
 	private String gender;
 	
 	private Integer permission; 
+
+	@Column(unique=true)
+	private String userName;
+	@Column(unique=true)
+	private String email;
 	
 	@JsonIgnore
 	@ElementCollection
@@ -62,7 +66,7 @@ public class User implements Serializable{
 	}
 	
 	public User(Integer id, String userName, String name, String lastName, String birth, String email, String password, String notes,
-		String gender, Permission permission, Address address) {
+			String gender, Permission permission, Address address) {
 		super();
 		this.id = id;
 		this.userName = userName;
@@ -73,7 +77,7 @@ public class User implements Serializable{
 		this.password = password;
 		this.notes = notes;
 		this.gender = gender;
-		this.permission =permission.getCod();
+		this.permission =  (permission==null) ? Permission.USER.getCod() : permission.getCod();
 		this.address = address;
 	}
 	

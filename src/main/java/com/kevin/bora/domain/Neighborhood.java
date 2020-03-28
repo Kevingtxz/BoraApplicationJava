@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -25,13 +27,18 @@ public class Neighborhood implements Serializable{
 	@OneToMany(mappedBy="neighborhood")
 	private List<Address> addresses = new ArrayList<>();
 	
+	@ManyToOne
+	@JoinColumn(name="city_id")
+	private City city;
+	
 	public Neighborhood() {
 	}
 
-	public Neighborhood(Integer id, String name) {
+	public Neighborhood(Integer id, String name, City city) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.city = city;
 	}
 
 	public Integer getId() {
@@ -56,6 +63,14 @@ public class Neighborhood implements Serializable{
 
 	public void setAddresses(List<Address> addresses) {
 		this.addresses = addresses;
+	}
+
+	public City getCity() {
+		return city;
+	}
+
+	public void setCity(City city) {
+		this.city = city;
 	}
 
 	@Override

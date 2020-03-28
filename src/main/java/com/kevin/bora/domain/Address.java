@@ -24,10 +24,6 @@ public class Address implements Serializable{
 	private String complement;
 	
 	@ManyToOne
-	@JoinColumn(name="city_id")
-	private City city;
-	
-	@ManyToOne
 	@JoinColumn(name="neighborhood_id")
 	private Neighborhood neighborhood;
 	
@@ -41,13 +37,12 @@ public class Address implements Serializable{
 	public Address() {
 	}
 	
-	public Address(Integer id, String number, String complement, Neighborhood neighborhood, City city) {
+	public Address(Integer id, String number, String complement, Neighborhood neighborhood) {
 		super();
 		this.id = id;
 		this.number = number;
 		this.complement = complement;
 		this.neighborhood = neighborhood;
-		this.city = city;
 	}
 
 	public Integer getId() {
@@ -82,14 +77,6 @@ public class Address implements Serializable{
 		this.neighborhood = neighborhood;
 	}
 	
-	public City getCity() {
-		return city;
-	}
-
-	public void setCity(City city) {
-		this.city = city;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;

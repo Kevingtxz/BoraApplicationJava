@@ -2,25 +2,65 @@ package com.kevin.bora.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 public class UserNewDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@NotEmpty
+	@Length(min=5, max=50, message="O tamnho deve ser entre 5 e 50 caracteres")
 	private String userName;
+	
+	@Length(min=5, max=20, message="O tamnho deve ser entre 5 e 20 caracteres")
+	@NotEmpty
 	private String name;
+	
+	@Length(min=5, max=50, message="O tamnho deve ser entre 5 e 50 caracteres")
+	@NotEmpty
 	private String lastName;
+	
+	@NotEmpty
+	@Length(min=6, max=6, message="A data não está como o esperado")
 	private String birth;
+	
+	@NotEmpty
+	@Length(min=5, max=50, message="O tamnho deve ser entre 5 e 30 caracteres")
+	@Email(message="Email inválido")
 	private String email;
+	
+	@NotEmpty
+	@Length(min=8, max=255, message="O tamnho deve ser entre 8 e 255 caracteres")
 	private String password;
+	
+	@NotEmpty
+	@Length(max=300, message="O tamnho deve ser entre 0 e 300 caracteres")
 	private String notes;
+	
+	@Length(max=1, message="O tamnho deve ser entre 0 e 1 caracteres")
 	private String gender;
-	private Integer permission; 
-
+	
+	@Length(max=10, message="O tamnho deve ser entre 0 e 10 caracteres")
+	@NotEmpty
 	private String number;
+	
 	private String complement;
+	
+	@NotEmpty
+	private Integer neighborhoodId;
+	
+	@NotEmpty
 	private String neighborhood;
 
+	@NotEmpty
+	private Integer cityId;
+	
+	@NotEmpty
 	private Integer addressId;
 	
+	@NotEmpty
 	private String phone1;
 	private String phone2;
 	
@@ -91,14 +131,6 @@ public class UserNewDTO implements Serializable{
 		this.gender = gender;
 	}
 
-	public Integer getPermission() {
-		return permission;
-	}
-
-	public void setPermission(Integer permission) {
-		this.permission = permission;
-	}
-
 	public String getNumber() {
 		return number;
 	}
@@ -115,12 +147,12 @@ public class UserNewDTO implements Serializable{
 		this.complement = complement;
 	}
 
-	public String getNeighborhood() {
-		return neighborhood;
+	public Integer getNeighborhoodId() {
+		return neighborhoodId;
 	}
 
-	public void setNeighborhood(String neighborhood) {
-		this.neighborhood = neighborhood;
+	public void setNeighborhoodId(Integer neighborhoodId) {
+		this.neighborhoodId = neighborhoodId;
 	}
 
 	public Integer getAddressId() {
@@ -146,5 +178,20 @@ public class UserNewDTO implements Serializable{
 	public void setPhone2(String phone2) {
 		this.phone2 = phone2;
 	}
-	
+
+	public String getNeighborhood() {
+		return neighborhood;
+	}
+
+	public void setNeighborhood(String neighborhood) {
+		this.neighborhood = neighborhood;
+	}
+
+	public Integer getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(Integer cityId) {
+		this.cityId = cityId;
+	}	
 }

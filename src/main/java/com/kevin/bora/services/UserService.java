@@ -11,11 +11,15 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.kevin.bora.domain.Address;
+import com.kevin.bora.domain.City;
+import com.kevin.bora.domain.Neighborhood;
 import com.kevin.bora.domain.User;
 import com.kevin.bora.domain.enums.Permission;
 import com.kevin.bora.dto.UserDTO;
 import com.kevin.bora.dto.UserNewDTO;
 import com.kevin.bora.repositories.AddressRepository;
+import com.kevin.bora.repositories.CityRepository;
+import com.kevin.bora.repositories.NeighborhoodRepository;
 import com.kevin.bora.repositories.UserRepository;
 import com.kevin.bora.services.exceptions.DataIntegrityException;
 import com.kevin.bora.services.exceptions.ObjectNotFoundException;
@@ -27,6 +31,10 @@ public class UserService {
 	private UserRepository repo;
 	@Autowired
 	private AddressRepository addressRepository;
+	@Autowired
+	private NeighborhoodRepository neighborhoodRepository;
+	@Autowired
+	private CityRepository cityRepository;
 	
 	
 	public User find( Integer id ) {
@@ -78,9 +86,19 @@ public class UserService {
 	}
 	
 	public User fromDTO(UserNewDTO objDto) {
-		Optional<Address> address = addressRepository.findById(objDto.getAddressId());	
+		Optional<Address> address = addressRepository.findById(objDto.getAddressId());
+		if(address == null) {
+			Optional<Neighborhood> neighborhood = neighborhoodRepository.findById(objDto.getNeighborhoodId());
+			Optional<City> city = cityRepository.findById(objDto.getCityId());
+			Neighborhood newNeighborhood = new Neighborhood(null, objDto.getNeighborhood(),city.orElse(null));
+			Address newAddress = new Address(null, objDto.getNumber(), objDto.getComplement(), neighborhood.orElse(newNeighborhood));
+			if(newAddress.getNeighborhood() == newNeighborhood) {
+				neighborhoodRepository.save(newNeighborhood);
+			}
+			addressRepository.save(newAddress);
+		}
 		User user  = new User(null, objDto.getUserName(), objDto.getName(), objDto.getLastName(), objDto.getBirth(), objDto.getEmail(), 
-				objDto.getPassword(), objDto.getNotes(), objDto.getGender(), Permission.toEnum(objDto.getPermission()), address.orElse(null));		
+				objDto.getPassword(), objDto.getNotes(), objDto.getGender(), null, address.orElse(null));		
 		user.getPhones().add(objDto.getPhone1());
 		if(objDto.getPhone2() != null) {
 			user.getPhones().add(objDto.getPhone2());

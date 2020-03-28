@@ -61,15 +61,15 @@ public class BoraApplication implements CommandLineRunner{
 		City c2 = new City(null, "São Paulo", s2);
 		City c3 = new City(null, "Rio Grande", s3);
 
-		Neighborhood n1 = new Neighborhood(null, "Mirante da Lagoa");
-		Neighborhood n2 = new Neighborhood(null, "Cassino");
-		Neighborhood n3 = new Neighborhood(null, "Lagomar");
+		Neighborhood n1 = new Neighborhood(null, "Mirante da Lagoa", c1);
+		Neighborhood n2 = new Neighborhood(null, "Cassino", c1);
+		Neighborhood n3 = new Neighborhood(null, "Lagomar", c3);
 		
-		Address a1 = new Address(null, "1024", "White House", n1, c1);
-		Address a2 = new Address(null, "108", "Black", n3, c1);
-		Address a3 = new Address(null, "24", "Grey", n2, c3);
+		Address a1 = new Address(null, "1024", "White House", n1);
+		Address a2 = new Address(null, "108", "Black", n3);
+		Address a3 = new Address(null, "24", "Grey", n2);
 		
-		User u1 = new User(null, "Kevingtxz", "Kevin", "Gonçalves", "21/10", "kevingtxz@gmail.com", "ratao", "macaco", "M", Permission.OWNER, a3);
+		User u1 = new User(null, "Kevingtxz", "Kevin", "Gonçalves", "21/10", "kevingtxz@gmail.com", "ratao", "macaco","M", Permission.OWNER, a3);
 		User u2 = new User(null, "BUGZONA", "Bug", "Mello", "10/2", "melo@hotmail.com", "vaca", "sapo", "F", Permission.BLOQUEAD, a2);
 		User u3 = new User(null, "Jack Tatue", "Walter", "Vargas", "25/03", "waltinho@wal.com", "soco", "vrawl", "M", Permission.MANAGER, a1);
 		
@@ -102,7 +102,7 @@ public class BoraApplication implements CommandLineRunner{
 		u3.getPhones().addAll(Arrays.asList("00909090"));
 
 		EventUsers eu1 = new EventUsers(null, Permission.OWNER, Participation.HIGHMEMBER, u1, e4);
-		EventUsers eu2 = new EventUsers(null, Permission.NOTMEMBER, Participation.NOTHING, u2, e1);
+		EventUsers eu2 = new EventUsers(null, Permission.USER, Participation.NOTHING, u2, e1);
 		EventUsers eu3 = new EventUsers(null, Permission.LIMITEDUSER, Participation.ACTIVE, u3, e1);
 
 		stateRepository.saveAll(Arrays.asList(s1, s2, s3));
