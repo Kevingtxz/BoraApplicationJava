@@ -22,4 +22,20 @@ public class EventResource {
 		Event obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
+
+	/*
+	 Solve this problem after
+	@RequestMapping(value="/page", method=RequestMethod.GET)
+	public ResponseEntity<Page<EventDTO>> findPage(
+			@RequestParam(value="name", defaultValue="") String name, 
+			@RequestParam(value="category", defaultValue="") Category category, 
+			@RequestParam(value="page", defaultValue="0") Integer page, 
+			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
+			@RequestParam(value="orderBy", defaultValue="name") String orderBy, 
+			@RequestParam(value="direction", defaultValue="ASC") String direction) {
+		Page<Event> list = service.search(name,  (category==null) ? null : category.getId(), page, linesPerPage, orderBy, direction);
+		Page<EventDTO> listDto = list.map(obj -> new EventDTO(obj));
+		return ResponseEntity.ok().body(listDto);
+	}
+	*/
 }
