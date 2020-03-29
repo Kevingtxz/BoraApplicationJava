@@ -1,7 +1,9 @@
 package com.kevin.bora.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
@@ -12,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -54,6 +57,10 @@ public class User implements Serializable{
 	@JoinColumn(name="eventUsers_id")
 	private EventUsers eventUsers;
 
+	@JsonIgnore
+	@ManyToMany(mappedBy="users")
+	private List<Chat> chats = new ArrayList<>();
+	
 	/*
 	@JsonIgnore
 	@OneToOne
@@ -184,6 +191,15 @@ public class User implements Serializable{
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	
+	public List<Chat> getChats() {
+		return chats;
+	}
+
+	public void setChats(List<Chat> chats) {
+		this.chats = chats;
+	}
+
 	/*
 	public MainPageUser getMainPageUser() {
 		return mainPageUser;

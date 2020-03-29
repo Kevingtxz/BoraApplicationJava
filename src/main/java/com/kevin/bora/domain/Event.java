@@ -37,6 +37,7 @@ public class Event  implements Serializable{
 	@OneToOne
 	@JoinColumn(name="eventusers_id")
 	private EventUsers eventUsers;
+	
 	/*
 	@JsonIgnore
 	@OneToOne
@@ -111,6 +112,7 @@ public class Event  implements Serializable{
 	public void setEventUsers(EventUsers eventUsers) {
 		this.eventUsers = eventUsers;
 	}
+	
 	/*
 	public MainPageEvent getMainPageEvent() {
 		return mainPageEvent;
