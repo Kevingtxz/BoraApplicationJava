@@ -1,18 +1,37 @@
 package com.kevin.bora.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Message {
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
+public class Message implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private User user;
+	private Integer receiver;
+	
+	@JsonIgnore
+	@ElementCollection
+	@CollectionTable(name="messages")
 	private List<String> messages = new ArrayList<>();
 	
 	public Message() {
 	}
 	
 	public Message(User user, String msg) {
-		this.user = user;
+		this.receiver = user.getId();
 		this.getMessages().add(msg);
 	}
 
@@ -24,12 +43,12 @@ public class Message {
 		this.id = id;
 	}
 
-	public User getUser() {
-		return user;
+	public Integer getReceiver() {
+		return receiver;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setReceiver(Integer receiver) {
+		this.receiver = receiver;
 	}
 
 	public List<String> getMessages() {

@@ -46,7 +46,7 @@ public class ChatService {
 		
 		public Chat updateData(Chat obj, Integer receptor, String msg) { 
 				for(int a = 0 ; a < obj.getMessages().size() ; a++) {
-					if(obj.getMessages().get(a).getUser().getId() == receptor) {
+					if(obj.getMessages().get(a).getReceiver() == receptor) {
 						obj.getMessages().get(a).getMessages().add(msg);
 						return repo.save(obj);
 					}

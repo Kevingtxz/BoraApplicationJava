@@ -14,8 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -58,7 +58,8 @@ public class User implements Serializable{
 	private EventUsers eventUsers;
 
 	@JsonIgnore
-	@ManyToMany(mappedBy="users")
+	@OneToMany
+	@JoinColumn(name="chat_id")
 	private List<Chat> chats = new ArrayList<>();
 	
 	/*
