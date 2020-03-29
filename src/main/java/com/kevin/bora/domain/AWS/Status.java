@@ -3,8 +3,6 @@ package com.kevin.bora.domain.AWS;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.kevin.bora.domain.Post;
-
 public class Status {
 	
 	private Integer id;

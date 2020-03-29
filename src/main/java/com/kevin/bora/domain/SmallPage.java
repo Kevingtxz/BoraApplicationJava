@@ -1,29 +1,40 @@
 package com.kevin.bora.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 
-import com.kevin.bora.domain.AWS.Photo;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
-public class SmallPage {
+@Entity
+public class SmallPage  implements Serializable{
+	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String description;
 	
-	private List<Post> posts = new ArrayList<>();
-	private Localization location;
-	private Event event;
-	private List<Photo> photos = new ArrayList<>();
+//	private Localization location;
+//	private List<Photo> photos = new ArrayList<>();
+//	private List<Post> posts = new ArrayList<>();
+
+	@ManyToOne
+	private MainPage mainPage;
 
 	public SmallPage() {
 	}
 
-	public SmallPage(Integer id, String description, Localization location, Event event) {
+	public SmallPage(Integer id, String description, 
+			//Localization location, 
+			MainPage mainPage) {
 		super();
 		this.id = id;
 		this.description = description;
-		this.location = location;
-		this.event = event;
+//		this.location = location;
+		this.mainPage = mainPage;
 	}
 
 	public Integer getId() {
@@ -41,7 +52,7 @@ public class SmallPage {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+/*
 	public List<Post> getPosts() {
 		return posts;
 	}
@@ -58,12 +69,12 @@ public class SmallPage {
 		this.location = location;
 	}
 
-	public Event getEvent() {
-		return event;
+	public MainPage getMainPage() {
+		return mainPage;
 	}
 
-	public void setEvent(Event event) {
-		this.event = event;
+	public void setMainPage(MainPage mainPage) {
+		this.mainPage = mainPage;
 	}
 
 	public List<Photo> getPhotos() {
@@ -73,7 +84,7 @@ public class SmallPage {
 	public void setPhotos(List<Photo> photos) {
 		this.photos = photos;
 	}
-
+*/
 	@Override
 	public int hashCode() {
 		final int prime = 31;

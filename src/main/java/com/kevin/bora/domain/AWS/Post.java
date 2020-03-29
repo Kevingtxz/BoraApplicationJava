@@ -1,4 +1,4 @@
-package com.kevin.bora.domain;
+package com.kevin.bora.domain.AWS;
 
 import java.util.Date;
 

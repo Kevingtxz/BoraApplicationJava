@@ -35,15 +35,12 @@ public class Event  implements Serializable{
 	
 	@JsonIgnore
 	@OneToOne
-	@JoinColumn(name="eventusers_id")
 	private EventUsers eventUsers;
 	
-	/*
 	@JsonIgnore
 	@OneToOne
-	@JoinColumn(name="mainPageEvent_id")
 	private MainPageEvent mainPageEvent;
-	*/
+
 	public Event() {
 	}
 

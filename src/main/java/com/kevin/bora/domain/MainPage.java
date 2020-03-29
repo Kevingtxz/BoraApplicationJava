@@ -2,53 +2,41 @@ package com.kevin.bora.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-public class Chat implements Serializable{
+public class MainPage  implements Serializable{
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-
-	@ManyToMany(cascade=CascadeType.ALL)
-	private Set<MainPage> mainPages = new HashSet<>();
-
-	@OneToMany(cascade=CascadeType.ALL)
-	private List<Message> messages = new ArrayList<>();
 	
-	public Chat() {
+	@JsonIgnore
+	@ManyToMany
+	@JoinColumn(name="chat_id")
+	private List<Chat> chats = new ArrayList<>();
+	
+	@JsonIgnore
+	@OneToMany
+	private List<SmallPage> smallPages;
+	
+	public MainPage() {
 	}
 	
-	public Chat(Integer id) {
+	public MainPage(Integer id) {
 		super();
 		this.id = id;
-	}
-
-	public Set<MainPage> getMainPages() {
-		return mainPages;
-	}
-
-	public void setMainPages(Set<MainPage> mainPages) {
-		this.mainPages = mainPages;
-	}
-
-	public List<Message> getMessages() {
-		return messages;
-	}
-
-	public void setMessages(List<Message> messages) {
-		this.messages = messages;
 	}
 
 	public Integer getId() {
@@ -57,6 +45,22 @@ public class Chat implements Serializable{
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public List<Chat> getChats() {
+		return chats;
+	}
+
+	public void setChats(List<Chat> chats) {
+		this.chats = chats;
+	}
+	
+	public List<SmallPage> getSmallPages() {
+		return smallPages;
+	}
+
+	public void setSmallPages(List<SmallPage> smallPages) {
+		this.smallPages = smallPages;
 	}
 
 	@Override
@@ -75,7 +79,7 @@ public class Chat implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Chat other = (Chat) obj;
+		MainPage other = (MainPage) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

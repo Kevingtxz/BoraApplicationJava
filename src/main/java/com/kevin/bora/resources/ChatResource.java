@@ -1,23 +1,7 @@
 package com.kevin.bora.resources;
 
-import java.net.URI;
-
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import com.kevin.bora.domain.Chat;
-import com.kevin.bora.dto.ChatDTO;
-import com.kevin.bora.services.ChatService;
-
 public class ChatResource {
-	
+	/*
 	@Autowired
 	private ChatService service;
 	
@@ -28,18 +12,17 @@ public class ChatResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody Chat obj){
+	public ResponseEntity<Void> insert(@Valid @RequestBody ChatNewDTO objNewDto){
+		Chat obj = service.fromDTO(objNewDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.
-				fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+				fromCurrentRequest().path("/{id}").buildAndExpand(obj.getChatPk()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody ChatDTO objDto, @PathVariable Integer id){
-		objDto.setId(id);
 		Chat obj = service.update(id, objDto);
-		obj.setId(id);
 		return ResponseEntity.noContent().build();
 	}	
 	
@@ -48,4 +31,5 @@ public class ChatResource {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+*/
 }

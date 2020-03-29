@@ -7,9 +7,12 @@ import org.springframework.stereotype.Service;
 
 import com.kevin.bora.domain.Address;
 import com.kevin.bora.domain.Category;
+import com.kevin.bora.domain.Chat;
 import com.kevin.bora.domain.City;
 import com.kevin.bora.domain.Event;
 import com.kevin.bora.domain.EventUsers;
+import com.kevin.bora.domain.MainPageEvent;
+import com.kevin.bora.domain.MainPageUser;
 import com.kevin.bora.domain.Neighborhood;
 import com.kevin.bora.domain.State;
 import com.kevin.bora.domain.User;
@@ -21,6 +24,9 @@ import com.kevin.bora.repositories.ChatRepository;
 import com.kevin.bora.repositories.CityRepository;
 import com.kevin.bora.repositories.EventRepository;
 import com.kevin.bora.repositories.EventUsersRepository;
+import com.kevin.bora.repositories.MainPageEventRepository;
+import com.kevin.bora.repositories.MainPageUserRepository;
+import com.kevin.bora.repositories.MessageRepository;
 import com.kevin.bora.repositories.NeighborhoodRepository;
 import com.kevin.bora.repositories.StateRepository;
 import com.kevin.bora.repositories.UserRepository;
@@ -47,7 +53,12 @@ public class DBService {
 	private NeighborhoodRepository neighborhoodRepository;
 	@Autowired
 	private ChatRepository chatRepository;
-
+	@Autowired
+	private MessageRepository MessageRepository;
+	@Autowired
+	private MainPageEventRepository  mainPageEventRepository;
+	@Autowired
+	private MainPageUserRepository mainPageUserRepository;
 	
 	public void instantiateTestDatabase() {
 		
@@ -71,8 +82,10 @@ public class DBService {
 		User u1 = new User(null, "Kevingtxz", "Kevin", "Gonçalves", "21/10", "kevingtxz@gmail.com", "ratao", "macaco","M", Permission.OWNER, a3);
 		User u2 = new User(null, "BUGZONA", "Bug", "Mello", "10/2", "melo@hotmail.com", "vaca", "sapo", "F", Permission.BLOQUEAD, a2);
 		User u3 = new User(null, "Jack Tatue", "Walter", "Vargas", "25/03", "waltinho@wal.com", "soco", "vrawl", "M", Permission.MANAGER, a1);
-		
-	//	Chat chat1 = new Chat(u1, u2, "Amo você");
+		User u4 = new User(null, "FernandoZ", "Fernando", "Rogzar", "31/10", "feZ@yahoo.com", "xatuba", "lalala","M", Permission.OWNER, a3);
+		User u5 = new User(null, "Rona", "Fox", "Megalo", "30/2", "rox@hotmail.com", "raposa", "xave", "F", Permission.LIMITEDUSER, a1);
+		User u6 = new User(null, "Mtz", "Matheus", "Cordeiro", "29/03", "cord@cod.com", "zap", "vraw", "F", Permission.USER, a2);
+
 		
 		Category cat1 = new Category(null, "Esporte");
 		Category cat2 = new Category(null, "Festa");	
@@ -93,6 +106,43 @@ public class DBService {
 		Event e9 = new Event(null, "Corrida em conjunto", "10/03/20", "30:40", cat6, a1);
 		Event e10 = new Event(null, "Festa do João", "10/03/20", "30:40", cat2, a1);
 
+		
+
+		Chat chat1 = new Chat(null);
+		Chat chat2 = new Chat(null);
+		Chat chat3 = new Chat(null);
+		Chat chat4 = new Chat(null);
+		Chat chat5 = new Chat(null);
+		Chat chat6 = new Chat(null);
+		Chat chat7 = new Chat(null);
+		Chat chat8 = new Chat(null);
+		Chat chat9 = new Chat(null);
+		Chat chat10 = new Chat(null);
+
+		MainPageEvent mPE1 = new MainPageEvent(null, e3);
+		MainPageEvent mPE2 = new MainPageEvent(null, e5);
+		MainPageEvent mPE3 = new MainPageEvent(null, e7);
+		MainPageEvent mPE4 = new MainPageEvent(null, e8);
+		MainPageEvent mPE5 = new MainPageEvent(null, e10);
+
+		MainPageUser mPU1 = new MainPageUser(null, u2);
+		MainPageUser mPU2 = new MainPageUser(null, u5);
+		MainPageUser mPU3 = new MainPageUser(null, u6);
+		MainPageUser mPU4 = new MainPageUser(null, u3);
+		MainPageUser mPU5 = new MainPageUser(null, u1);
+
+		chat1.getMainPages().addAll(Arrays.asList(mPE1, mPU1));
+		chat2.getMainPages().addAll(Arrays.asList(mPE4, mPE2));
+		chat3.getMainPages().addAll(Arrays.asList(mPU1, mPU4));
+		chat4.getMainPages().addAll(Arrays.asList(mPE2, mPU1));
+		chat5.getMainPages().addAll(Arrays.asList(mPE5, mPU4));		
+		chat6.getMainPages().addAll(Arrays.asList(mPE3, mPU5));
+		chat7.getMainPages().addAll(Arrays.asList(mPU5, mPE1));
+		chat8.getMainPages().addAll(Arrays.asList(mPU2, mPU4));
+		chat9.getMainPages().addAll(Arrays.asList(mPU5, mPU4));
+		chat10.getMainPages().addAll(Arrays.asList(mPU4, mPU3));		
+		
+		
 		cat1.getEvents().addAll(Arrays.asList(e1,e2));
 		cat2.getEvents().addAll(Arrays.asList(e3, e4));
 		cat3.getEvents().addAll(Arrays.asList(e1,e2, e3));
@@ -116,9 +166,15 @@ public class DBService {
 		cityRepository.saveAll(Arrays.asList(c1, c2, c3));
 		neighborhoodRepository.saveAll(Arrays.asList(n1, n2, n3));
 		addressRepository.saveAll(Arrays.asList(a1, a2, a3));
-		userRepository.saveAll(Arrays.asList(u1, u2, u3));
+		userRepository.saveAll(Arrays.asList(u1, u2, u3, u4, u5, u6));
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6));
 		eventRepository.saveAll(Arrays.asList(e1, e2, e3, e4, e5, e6, e7, e8, e9, e10));
+		
+		chatRepository.saveAll(Arrays.asList(chat1, chat2, chat3, chat4, chat5, chat6, chat7, chat8, chat9, chat10));
+		mainPageEventRepository.saveAll(Arrays.asList(mPE1, mPE2, mPE3, mPE4, mPE5));
+		mainPageUserRepository.saveAll(Arrays.asList(mPU1, mPU2, mPU3, mPU4, mPU5));
+		
 		eventUsersRepository.saveAll(Arrays.asList(eu1, eu2, eu3));
+	
 	}
 }

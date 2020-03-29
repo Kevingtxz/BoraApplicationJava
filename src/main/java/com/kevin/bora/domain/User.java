@@ -1,9 +1,7 @@
 package com.kevin.bora.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
@@ -15,7 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -54,13 +51,7 @@ public class User implements Serializable{
 	
 	@JsonIgnore
 	@OneToOne
-	@JoinColumn(name="eventUsers_id")
 	private EventUsers eventUsers;
-
-	@JsonIgnore
-	@OneToMany
-	@JoinColumn(name="chat_id")
-	private List<Chat> chats = new ArrayList<>();
 	
 	/*
 	@JsonIgnore
@@ -192,15 +183,6 @@ public class User implements Serializable{
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
-	public List<Chat> getChats() {
-		return chats;
-	}
-
-	public void setChats(List<Chat> chats) {
-		this.chats = chats;
-	}
-
 	/*
 	public MainPageUser getMainPageUser() {
 		return mainPageUser;
