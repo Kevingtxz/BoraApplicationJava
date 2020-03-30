@@ -2,11 +2,8 @@ package com.kevin.bora.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,14 +14,15 @@ import javax.persistence.OneToMany;
 @Entity
 public class Chat implements Serializable{
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 
-	@ManyToMany(cascade=CascadeType.ALL)
-	private Set<MainPage> mainPages = new HashSet<>();
+	@ManyToMany
+	private List<MainPage> mainPages = new ArrayList<>();
 
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany
 	private List<Message> messages = new ArrayList<>();
 	
 	public Chat() {
@@ -35,11 +33,11 @@ public class Chat implements Serializable{
 		this.id = id;
 	}
 
-	public Set<MainPage> getMainPages() {
+	public List<MainPage> getMainPages() {
 		return mainPages;
 	}
 
-	public void setMainPages(Set<MainPage> mainPages) {
+	public void setMainPages(List<MainPage> mainPages) {
 		this.mainPages = mainPages;
 	}
 

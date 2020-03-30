@@ -1,16 +1,13 @@
 package com.kevin.bora.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -22,21 +19,27 @@ public class MainPage  implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
+	private String name;
+	private String birth;
+	private String password;
+	private String notes;
+
 	@JsonIgnore
-	@ManyToMany
-	@JoinColumn(name="chat_id")
-	private List<Chat> chats = new ArrayList<>();
-	
-	@JsonIgnore
-	@OneToMany
-	private List<SmallPage> smallPages;
+	@ManyToOne
+	@JoinColumn(name="address_id")
+	private Address address;
 	
 	public MainPage() {
 	}
-	
-	public MainPage(Integer id) {
+
+	public MainPage(Integer id, String name, String birth, String password, String notes, Address address) {
 		super();
 		this.id = id;
+		this.name = name;
+		this.birth = birth;
+		this.password = password;
+		this.notes = notes;
+		this.address = address;
 	}
 
 	public Integer getId() {
@@ -47,20 +50,44 @@ public class MainPage  implements Serializable{
 		this.id = id;
 	}
 
-	public List<Chat> getChats() {
-		return chats;
+	public String getName() {
+		return name;
 	}
 
-	public void setChats(List<Chat> chats) {
-		this.chats = chats;
-	}
-	
-	public List<SmallPage> getSmallPages() {
-		return smallPages;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setSmallPages(List<SmallPage> smallPages) {
-		this.smallPages = smallPages;
+	public String getBirth() {
+		return birth;
+	}
+
+	public void setBirth(String birth) {
+		this.birth = birth;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getNotes() {
+		return notes;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 
 	@Override

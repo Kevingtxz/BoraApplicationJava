@@ -1,4 +1,4 @@
-package com.kevin.bora.domain;
+package com.kevin.bora.domain.AWS;
 
 import java.io.Serializable;
 
@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import com.kevin.bora.domain.MainPage;
 
 @Entity
 public class SmallPage  implements Serializable{
